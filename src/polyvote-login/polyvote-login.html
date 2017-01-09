@@ -26,6 +26,7 @@ Polymer Element polyvote-login
 
         <template is="dom-if" if="[[user]]">
             <h1>Welcome [[user.displayName]]</h1>
+            <div>Email: [[user.email]]</div>
         </template>
 
         <paper-button raised on-tap="login" hidden$="[[user]]">Sign In</paper-button>
