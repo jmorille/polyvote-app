@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
@@ -21,23 +22,35 @@ Polymer Element polyvote-election
 
 <dom-module id="polyvote-election">
     <template>
-        <style>
+        <style is="custom-style" include="iron-flex iron-flex-alignment iron-flex-factors">
             :host {
                 display: block;
+            }
+
+            marked-element {
+                display: block;
+                background-color: var(--google-grey-100);
+                padding: 10px 30px;
+                margin-bottom: 10px;
+            }
+            .markdown-html.custom p {
+                padding-left: 24px;
             }
         </style>
         <firebase-auth  user="{{user}}"></firebase-auth>
 
-        <div id="card">
-            <div>
+        <div id="card"  class="layout vertical">
+            <section class="layout vertical">
                 <paper-input id="election" label="Question"></paper-input>
-                <paper-textarea value="{{description}}"></paper-textarea>
-                <marked-element markdown="[[description]]">
-                    <div class="markdown-html custom"></div>
-                </marked-element>
-            </div>
+                <div class="layout horizontal">
+                    <paper-textarea class="flex" value="{{description}}"></paper-textarea>
+                    <marked-element  class="flex" markdown="[[description]]">
+                        <div class="markdown-html custom"></div>
+                    </marked-element>
+                </div>
+            </section>
 
-            <div id="candidates">
+            <section id="candidates">
                 <ul id="candidates-list">
                     <template is="dom-repeat" items="[[candidates]]" as="candidate">
                         <li>
@@ -51,7 +64,7 @@ Polymer Element polyvote-election
                 <div id="candidates-controls">
                     <paper-button id="add" on-tap="add">Add</paper-button>
                 </div>
-            </div>
+            </section>
         </div>
 
     </template>
