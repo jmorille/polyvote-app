@@ -1,0 +1,6 @@
+{
+  "name": "polyvote-app",
+  "short_name": "polyvote-app",
+  "start_url": "/",
+  "display": "standalone"
+}

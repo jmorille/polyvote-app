@@ -1,0 +1,93 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="../../bower_components/polymerfire/firebase-auth.html">
+
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
+
+<!--
+`polyvote-election`
+Polymer Element polyvote-election
+
+@demo demo/index.html 
+-->
+
+<dom-module id="polyvote-election">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+        </style>
+        <firebase-auth  user="{{user}}"></firebase-auth>
+
+        <div id="card">
+            <div>
+                <paper-input id="election" label="Question"></paper-input>
+                <paper-textarea value="{{description}}"></paper-textarea>
+                <marked-element markdown="[[description]]">
+                    <div class="markdown-html custom"></div>
+                </marked-element>
+            </div>
+
+            <div id="candidates">
+                <ul id="candidates-list">
+                    <template is="dom-repeat" items="[[candidates]]" as="candidate">
+                        <li>
+                            <p class="content">[[candidate.content]]</p>
+                            <paper-icon-button icon="clear" note="[[candidate]]" on-tap="remove"></paper-icon-button>
+                        </li>
+                    </template>
+                </ul>
+
+                <paper-input id="input" label="Add a candidate..."></paper-input>
+                <div id="candidates-controls">
+                    <paper-button id="add" on-tap="add">Add</paper-button>
+                </div>
+            </div>
+        </div>
+
+    </template>
+
+    <script>
+        Polymer({
+
+            is: 'polyvote-election',
+
+            properties: {
+                user: {
+                    type: Object
+                },
+                candidates: {
+                    type: Array,
+                    notify: true
+                },
+                description: {
+                    type: String,
+                    value: '***Bold and italic***'
+                },
+            },
+
+            add: function () {
+                this.$.query.ref.push({
+                    content: this.$.input.value
+                });
+                this.$.input.value = null;
+            },
+
+            remove: function (e) {
+                var key = e.currentTarget.note.$key;
+                this.$.query.ref.child(key).remove();
+
+            },
+
+        });
+    </script>
+</dom-module>

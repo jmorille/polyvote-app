@@ -1,0 +1,11 @@
+
+
+# IDEA
+.idea
+*.iml
+
+# Common
+*.log
+
+# Bower
+/bower_components
