@@ -13,6 +13,8 @@
 <link rel="import" href="../../bower_components/polymerfire/firebase-database-behavior.html">
 
 <link rel="import" href="../../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../../bower_components/prism-element/prism-highlighter.html">
+<link rel="import" href="../../bower_components/prism-element/prism-theme-default.html">
 
 <!--
 `polyvote-election`
@@ -23,7 +25,7 @@ Polymer Element polyvote-election
 
 <dom-module id="polyvote-election">
     <template>
-        <style is="custom-style" include="iron-flex iron-flex-alignment iron-flex-factors">
+        <style is="custom-style" include="prism-theme-default iron-flex iron-flex-alignment iron-flex-factors">
             :host {
                 display: block;
             }
@@ -39,6 +41,7 @@ Polymer Element polyvote-election
             }
         </style>
         <firebase-auth  user="{{user}}"></firebase-auth>
+        <prism-highlighter></prism-highlighter>
 
         <div id="card"  class="layout vertical">
 
