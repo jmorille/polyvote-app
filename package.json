@@ -1,7 +1,7 @@
 {
   "name": "polyvote-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Majority Judgement",
   "main": "src/polyvote-app/polyvote-app.html",
   "directories": {
     "test": "test"
